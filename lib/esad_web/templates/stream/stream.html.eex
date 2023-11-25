@@ -1,0 +1,5 @@
+<section class="phx-hero">
+  <h1>Stream: <%= @stream_id %></h1>
+</section>
+
+<pre><%= inspect @stream, pretty: true %></pre>

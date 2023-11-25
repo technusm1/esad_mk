@@ -1,0 +1,23 @@
+<section class="phx-hero">
+  <h1>Signal Analamolies Detection System</h1>
+  <p>A simple way to see analamolies in .</p>
+</section>
+
+<section class="row">
+  <article class="column">
+    <h2>Streams</h2>
+    <ul>
+    <%= for {id, state} <- @streams do %>
+      <li><%= link id, to: Routes.stream_path(@conn, :stream, id) %></li>
+    <% end %>
+  </article>
+  <article class="column">
+    <h2>Stats</h2>
+    <ul>
+      <li>Total Streams: <%= map_size(@streams) %></li>
+      <li>Total Input Events: <%= Enum.reduce(@streams, 0, fn({_, v}, acc) -> v.stats.inputs + acc end) %></li>
+      <li>Total Output Events: <%= Enum.reduce(@streams, 0, fn({_, v}, acc) -> v.stats.outputs + acc end) %></li>
+      <li>Errors pr. hour: <%= Enum.reduce(@streams, 0, fn({_, v}, acc) -> v.stats.hourly_error_rate + acc end) %></li>
+    </ul>
+  </article>
+</section>
